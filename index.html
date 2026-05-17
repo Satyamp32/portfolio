@@ -1,547 +1,322 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Satyam Kumar Pandey — AI Product Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:#03071a;color:#e8edf5;font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-user-select:none;user-select:none}
-::selection{background:rgba(99,220,185,.18)}
-img{pointer-events:none}
-
-/* CURSOR */
-#cur{position:fixed;width:10px;height:10px;background:#63dcb9;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
-#curR{position:fixed;width:38px;height:38px;border:1px solid rgba(99,220,185,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s ease}
-body:hover #cur{opacity:1}
-
-/* PARTICLES */
-#canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem;background:rgba(3,7,26,.75);backdrop-filter:blur(24px);border-bottom:1px solid rgba(99,220,185,.08)}
-.logo{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#63dcb9;letter-spacing:.22em;text-transform:uppercase;text-decoration:none}
-.nlinks{display:flex;gap:2.2rem;list-style:none}
-.nlinks a{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#5a6a8a;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
-.nlinks a:hover{color:#63dcb9}
-.ncta{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#03071a;background:linear-gradient(135deg,#63dcb9,#3ab89a);padding:.5rem 1.3rem;text-decoration:none;border-radius:2px;letter-spacing:.08em;text-transform:uppercase;transition:opacity .2s;box-shadow:0 0 20px rgba(99,220,185,.25)}
-.ncta:hover{opacity:.85}
-
-/* HERO */
-#hero{min-height:100vh;display:grid;place-items:center;padding:6rem 3.5rem 2rem;position:relative;overflow:hidden;z-index:1}
-.hinner{max-width:900px;width:100%}
-.hbadge{display:inline-flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#63dcb9;border:1px solid rgba(99,220,185,.25);padding:.35rem 1rem;border-radius:2px;background:rgba(99,220,185,.05);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.8rem;animation:fadeUp .7s .1s both}
-.pulse{width:7px;height:7px;border-radius:50%;background:#63dcb9;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(99,220,185,.6)}50%{box-shadow:0 0 0 6px rgba(99,220,185,0)}}
-h1{font-family:'Playfair Display',serif;font-size:clamp(3.4rem,8vw,7.2rem);font-weight:400;line-height:.93;letter-spacing:-.025em;color:#e8edf5;margin-bottom:1.6rem;animation:fadeUp .7s .2s both}
-h1 em{font-style:italic;color:#63dcb9}
-.hsub{font-size:.96rem;color:#6a7a9a;max-width:540px;line-height:1.85;margin-bottom:2.3rem;animation:fadeUp .7s .3s both}
-.hsub strong{color:#b0bdd0;font-weight:400}
-.hbtns{display:flex;gap:.8rem;flex-wrap:wrap;animation:fadeUp .7s .4s both}
-.btnp{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#03071a;background:linear-gradient(135deg,#63dcb9,#3ab89a);padding:.8rem 1.8rem;text-decoration:none;border-radius:2px;letter-spacing:.07em;text-transform:uppercase;box-shadow:0 4px 24px rgba(99,220,185,.28);transition:transform .2s,box-shadow .2s}
-.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,220,185,.38)}
-.btns{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#5a6a8a;border:1px solid rgba(90,106,138,.3);padding:.8rem 1.8rem;text-decoration:none;border-radius:2px;letter-spacing:.07em;text-transform:uppercase;transition:all .2s}
-.btns:hover{color:#e8edf5;border-color:rgba(90,106,138,.7)}
-.hstats{position:absolute;right:3.5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2rem;text-align:right;animation:fadeUp .7s .5s both}
-.snum{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:400;color:#e8edf5;line-height:1}
-.slbl{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:#3a4a6a;text-transform:uppercase;letter-spacing:.14em;margin-top:.15rem}
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-
-/* SECTION BASE */
-.sec{max-width:1080px;margin:0 auto;padding:6rem 3.5rem}
-.slbl2{display:flex;align-items:center;gap:.8rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#63dcb9;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem}
-.slbl2::before{content:'';display:inline-block;width:22px;height:1px;background:linear-gradient(to right,#63dcb9,transparent)}
-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.1;color:#e8edf5;margin-bottom:2.4rem}
-section{position:relative;z-index:1}
-
-/* ABOUT */
-#about{background:rgba(8,14,32,.7);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
-.agrid{display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:start}
-.ap{font-size:.9rem;color:#6a7a9a;margin-bottom:.95rem;line-height:1.85}
-.ap strong{color:#b0bdd0;font-weight:400}
-.aquote{border-left:2px solid #63dcb9;padding:1rem 1.25rem;background:rgba(99,220,185,.04);margin-top:1.8rem;font-family:'Playfair Display',serif;font-size:1rem;color:#7a8aaa;font-style:italic;line-height:1.75}
-.skillgroup{margin-bottom:1.7rem}
-.skilllbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#3a4a6a;text-transform:uppercase;letter-spacing:.16em;margin-bottom:.55rem}
-.tags{display:flex;flex-wrap:wrap;gap:.35rem}
-.tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.28rem .7rem;border:1px solid rgba(255,255,255,.06);color:#5a6a8a;border-radius:2px;transition:all .2s}
-.tag.ai{border-color:rgba(99,220,185,.2);color:#63dcb9;background:rgba(99,220,185,.05)}
-.tag.pm{border-color:rgba(150,130,255,.2);color:#9b82ff;background:rgba(150,130,255,.05)}
-.tag.data{border-color:rgba(245,175,70,.2);color:#f5af46;background:rgba(245,175,70,.05)}
-
-/* PROJECTS */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1px;background:rgba(255,255,255,.05)}
-.pcard{background:#03071a;padding:1.9rem;transition:background .25s,transform .25s;position:relative;overflow:hidden}
-.pcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,220,185,.04) 0%,transparent 60%);opacity:0;transition:opacity .3s}
-.pcard:hover{background:#060d20}
-.pcard:hover::before{opacity:1}
-.pcard.feat{border-top:2px solid #63dcb9}
-.pn{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#3a4a6a;letter-spacing:.1em;margin-bottom:.7rem}
-.ptit{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:400;color:#e8edf5;margin-bottom:.35rem;line-height:1.3}
-.psub{font-family:'JetBrains Mono',monospace;font-size:.59rem;color:#63dcb9;margin-bottom:.8rem;letter-spacing:.05em}
-.pdesc{font-size:.84rem;color:#6a7a9a;line-height:1.68;margin-bottom:1rem}
-.ptags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.9rem}
-.ptag{font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.15rem .5rem;background:rgba(255,255,255,.04);color:#3a4a6a;border:1px solid rgba(255,255,255,.06);border-radius:2px;text-transform:uppercase;letter-spacing:.05em}
-.plink{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#63dcb9;text-decoration:none;border-bottom:1px solid rgba(99,220,185,.25);padding-bottom:1px;transition:border-color .2s}
-.plink:hover{border-color:#63dcb9}
-
-/* EXPERIENCE */
-#experience{background:rgba(8,14,32,.7)}
-.tl{position:relative;padding-left:1.5rem}
-.tl::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,#63dcb9 0%,rgba(99,220,185,.1) 70%,transparent 100%)}
-.tli{position:relative;padding-left:2.2rem;margin-bottom:3rem}
-.tli::before{content:'';position:absolute;left:-1.5rem;top:8px;width:8px;height:8px;border-radius:50%;background:#63dcb9;border:2px solid #03071a;box-shadow:0 0 0 1px #63dcb9,0 0 12px rgba(99,220,185,.4)}
-.tli.amber::before{background:#f5af46;box-shadow:0 0 0 1px #f5af46,0 0 12px rgba(245,175,70,.4)}
-.tmeta{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#3a4a6a;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
-.ttit{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:400;color:#e8edf5;margin-bottom:.12rem}
-.tco{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:#63dcb9;letter-spacing:.06em;margin-bottom:.85rem}
-.tco.amber{color:#f5af46}
-.tbl{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.tbl li{font-size:.85rem;color:#6a7a9a;padding-left:1rem;position:relative;line-height:1.65}
-.tbl li::before{content:'—';position:absolute;left:0;color:#3a4a6a}
-.badge{display:inline-flex;align-items:center;gap:.35rem;margin-top:.55rem;font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#f5af46;background:rgba(245,175,70,.08);border:1px solid rgba(245,175,70,.2);padding:.2rem .6rem;border-radius:2px}
-.nowtag{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:#03071a;background:#f5af46;padding:.12rem .5rem;border-radius:2px;margin-left:.6rem;vertical-align:middle}
-
-/* CASE STUDIES */
-#cases{background:#03071a}
-.cgrid{display:grid;gap:1.5rem}
-.ccard{background:rgba(8,14,32,.8);border:1px solid rgba(255,255,255,.06);padding:2rem 2.2rem;border-radius:4px;transition:border-color .25s}
-.ccard:hover{border-color:rgba(99,220,185,.2)}
-.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;gap:1rem}
-.ctit{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:400;color:#e8edf5}
-.ctag{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#63dcb9;background:rgba(99,220,185,.08);border:1px solid rgba(99,220,185,.2);padding:.18rem .6rem;border-radius:2px;white-space:nowrap}
-.metrics{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
-.metric{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#63dcb9;background:rgba(99,220,185,.06);border:1px solid rgba(99,220,185,.15);padding:.22rem .6rem;border-radius:2px}
-.cbody{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
-.cclbl{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#3a4a6a;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.5rem}
-.ccol ul{list-style:none;display:flex;flex-direction:column;gap:.32rem}
-.ccol li{font-size:.8rem;color:#6a7a9a;padding-left:.9rem;position:relative;line-height:1.55}
-.ccol li::before{content:'›';position:absolute;left:0;color:#63dcb9}
-
-/* CERTS */
-#certs{background:rgba(8,14,32,.7)}
-.certgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.85rem}
-.cert{border:1px solid rgba(255,255,255,.06);padding:1.2rem;background:rgba(3,7,26,.8);border-radius:4px;transition:border-color .25s,transform .25s}
-.cert:hover{border-color:rgba(99,220,185,.2);transform:translateY(-3px)}
-.cico{width:34px;height:34px;background:rgba(99,220,185,.08);border:1px solid rgba(99,220,185,.2);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:#63dcb9;letter-spacing:.04em}
-.cname{font-size:.82rem;color:#b0bdd0;font-weight:400;margin-bottom:.2rem;line-height:1.4}
-.ciss{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#3a4a6a;text-transform:uppercase;letter-spacing:.08em}
-
-/* CONTACT */
-#contact{text-align:center;background:rgba(8,14,32,.7);border-top:1px solid rgba(255,255,255,.04)}
-.ci{max-width:560px;margin:0 auto;padding:6rem 2rem}
-.ci h2{margin-bottom:.8rem}
-.ci p{font-size:.93rem;color:#6a7a9a;line-height:1.85;margin-bottom:2.2rem}
-.cbtns{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap}
-
-/* FOOTER */
-footer{padding:1.8rem 3.5rem;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
-.ft{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#3a4a6a;letter-spacing:.1em}
-
-/* SCROLL REVEAL */
-.rev{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
-.rev.on{opacity:1;transform:none}
-
-/* COPY PROTECTION */
-body{-webkit-touch-callout:none}
-
-/* GLOW LINE */
-.gline{height:1px;background:linear-gradient(to right,transparent,rgba(99,220,185,.4),transparent);margin:0}
-
-@media(max-width:900px){
-  nav{padding:.9rem 1.5rem}.nlinks,.ncta{display:none}
-  #hero,.sec{padding-left:1.5rem;padding-right:1.5rem}
-  .agrid{grid-template-columns:1fr;gap:2.5rem}
-  .hstats{display:none}
-  .cbody{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:.5rem;text-align:center}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO & Open Graph Tags -->
+  <title>Satyam Kumar Pandey — AI Product Manager</title>
+  <meta name="description" content="Portfolio of Satyam Kumar Pandey, an AI Product Manager & Technical Lead specializing in AI workflows, automation, and petabyte-scale data platforms.">
+  <meta property="og:title" content="Satyam Kumar Pandey — AI Product Manager">
+  <meta property="og:description" content="Explore PM case studies, AI automation workflows, and technical leadership across Apple, Google, and Uber.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://satyamkumar.vercel.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+  <!-- Animated Background -->
+  <div class="bg-mesh"></div>
 
-<!-- CURSOR -->
-<div id="cur"></div>
-<div id="curR"></div>
-<!-- PARTICLES -->
-<canvas id="canvas"></canvas>
+  <!-- CURSOR -->
+  <div id="cur"></div>
+  <div id="curR"></div>
 
-<nav>
-  <a href="#hero" class="logo">SKP</a>
-  <ul class="nlinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#cases">Cases</a></li>
-    <li><a href="#experience">Journey</a></li>
-    <li><a href="#certs">Credentials</a></li>
-  </ul>
-  <a href="#contact" class="ncta">Hire Me</a>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hinner">
-    <div class="hbadge"><span class="pulse"></span>AI PM Fellow · Open to PM Roles · Bengaluru</div>
-    <h1>Satyam<br><em>Kumar</em><br>Pandey</h1>
-    <p class="hsub"><strong>AI Product Manager.</strong> 7+ years building petabyte-scale data systems at Wipro for Uber, Apple &amp; Google. Currently an <strong>AI PM Fellow at NextLeap</strong> — shipping LLM products, writing PRDs, and applying AI workflows to real product problems.</p>
-    <div class="hbtns">
-      <a href="#projects" class="btnp">View PM Work</a>
-      <a href="https://www.linkedin.com/in/satyamp32/" target="_blank" rel="noopener" class="btns">LinkedIn ↗</a>
-      <a href="#contact" class="btns">Get in Touch</a>
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="logo">Satyam</a>
+    <ul class="nlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Work & Cases</a></li>
+      <li><a href="#experience">Journey</a></li>
+      <li><a href="#certs">Credentials</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+      <a href="#contact" class="ncta">Hire Me</a>
     </div>
-  </div>
-  <div class="hstats">
-    <div><div class="snum">7+</div><div class="slbl">Yrs Engineering</div></div>
-    <div><div class="snum">3</div><div class="slbl">PM Prototypes</div></div>
-    <div><div class="snum">PMP</div><div class="slbl">Certified</div></div>
-  </div>
-</section>
+  </nav>
 
-<div class="gline"></div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="sec">
-    <div class="agrid">
-      <div class="rev">
-        <div class="slbl2">About</div>
-        <h2>Data depth meets<br>AI product thinking</h2>
-        <p class="ap">I spent 7 years building large-scale data infrastructure at Wipro — leading teams, managing petabyte pipelines, and translating technical complexity into business outcomes for <strong>Uber, Apple, and Google YouTube</strong>.</p>
-        <p class="ap">Now I'm a <strong>NextLeap AI PM Fellow</strong> (March–June 2026), building LLM products, designing AI workflows, writing PRDs, and shipping live prototypes. My engineering background means I can spec RAG pipelines, evaluate AI systems, and speak the language of every team in the room.</p>
-        <p class="ap">I'm drawn to <strong>AI-native products, data platforms, and B2B SaaS</strong> — where technical depth isn't a bonus, it's the product.</p>
-        <div class="aquote">"The rarest PM is one who can go deep with engineers on Monday, present metrics to the board on Tuesday, and ship a prototype by Friday."</div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hinner">
+      <div class="hbadge">
+        <span style="display:inline-block;width:6px;height:6px;background:var(--accent-color);border-radius:50%;animation:pulse 2s infinite;"></span>
+        AI PM Fellow · Open to Roles · Bengaluru
       </div>
-      <div class="rev">
-        <div class="skillgroup">
-          <div class="skilllbl">AI / ML Product</div>
-          <div class="tags">
-            <span class="tag ai">LLM Applications</span><span class="tag ai">AI Agents</span><span class="tag ai">RAG Pipelines</span><span class="tag ai">AI Evals</span><span class="tag ai">Chatbot Design</span><span class="tag ai">Prompt Engineering</span><span class="tag ai">Vibe Coding</span><span class="tag ai">AI Workflows</span>
-          </div>
-        </div>
-        <div class="skillgroup">
-          <div class="skilllbl">Product Management</div>
-          <div class="tags">
-            <span class="tag pm">User Research</span><span class="tag pm">PRD Writing</span><span class="tag pm">Roadmapping</span><span class="tag pm">RICE Prioritisation</span><span class="tag pm">OKRs &amp; Metrics</span><span class="tag pm">A/B Testing</span><span class="tag pm">Go-to-Market</span><span class="tag pm">MVP Definition</span>
-          </div>
-        </div>
-        <div class="skillgroup">
-          <div class="skilllbl">Technical Foundation</div>
-          <div class="tags">
-            <span class="tag data">SQL / HiveQL</span><span class="tag data">Apache Spark</span><span class="tag data">Airflow</span><span class="tag data">Python</span><span class="tag data">Snowflake</span><span class="tag data">AWS</span><span class="tag data">REST APIs</span><span class="tag data">Tableau</span>
-          </div>
-        </div>
+      <h1>Satyam <span class="accent-text">Kumar</span> Pandey</h1>
+      <p class="hsub">
+        <strong>AI Product Manager.</strong> 7+ years building petabyte-scale systems at Wipro for <strong>Uber, Apple, & Google</strong>. Now an <strong>AI PM Fellow at NextLeap</strong>, shipping LLM products, RAG pipelines, and applying AI workflows to real business problems.
+      </p>
+      <div class="hbtns">
+        <a href="#projects" class="btn-primary">View Case Studies</a>
+        <a href="#" class="btn-secondary">Download Resume ↓</a>
+        <a href="https://github.com/Satyamp32" target="_blank" rel="noopener" class="btn-icon" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/satyamp32/" target="_blank" rel="noopener" class="btn-icon" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="gline"></div>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="sec">
-    <div class="slbl2">PM Projects</div>
-    <h2>Product case studies & builds</h2>
-    <p style="font-size:.87rem;color:#6a7a9a;max-width:460px;line-height:1.8;margin-bottom:2.3rem">Real problems. End-to-end product thinking. Each case spans discovery → PRD → prototype → metrics.</p>
-    <div class="pgrid rev">
-
-      <div class="pcard feat">
-        <div class="pn">01 · Featured · AI PM Fellowship</div>
-        <div class="ptit">ChatGPT Voice Nudge System</div>
-        <div class="psub">Conversational AI · Behavioral Design · NextLeap</div>
-        <p class="pdesc">Conducted 25-user research study to surface ChatGPT voice adoption gap (88% awareness, only 48% usage). Designed contextual voice nudge system using intent detection — targeting 60% voice usage in 3 months. Wrote full PRD with metrics, user flows, and A/B test plan.</p>
-        <div class="ptags"><span class="ptag">User Research</span><span class="ptag">PRD</span><span class="ptag">AI/NLP</span><span class="ptag">Behavioral</span></div>
-        <a href="https://satyam-speak-easy-nudge.lovable.app/" target="_blank" rel="noopener" class="plink">View Prototype ↗</a>
-      </div>
-
-      <div class="pcard feat">
-        <div class="pn">02 · Featured Build</div>
-        <div class="ptit">PhonePe Marketplace</div>
-        <div class="psub">0→1 Product Design · Fintech · Commerce</div>
-        <p class="pdesc">Conceptualized an intent-led marketplace within PhonePe — built a Category → Subcategory framework across 8+ commerce verticals, mobile-first UX flow aligned with fintech user behavior. Full 0→1 product design with discovery, structure, and metrics.</p>
-        <div class="ptags"><span class="ptag">0→1</span><span class="ptag">Discovery</span><span class="ptag">UX Flow</span><span class="ptag">Fintech</span></div>
-        <a href="https://satyam-phonepe-marketplace.lovable.app/" target="_blank" rel="noopener" class="plink">View Prototype ↗</a>
-      </div>
-
-      <div class="pcard">
-        <div class="pn">03</div>
-        <div class="ptit">Zomato AI Semantic Search</div>
-        <div class="psub">Discovery Optimization · Consumer · AI</div>
-        <p class="pdesc">Proposed AI-powered semantic search enabling natural language queries like "healthy dinner under ₹300". Designed intent parsing and contextual ranking to increase search-to-order conversion and reduce zero-result rates.</p>
-        <div class="ptags"><span class="ptag">Semantic Search</span><span class="ptag">AI/ML</span><span class="ptag">Conversion</span></div>
-      </div>
-
-      <div class="pcard" style="opacity:.45">
-        <div class="pn">04 · In Progress</div>
-        <div class="ptit">Data Pipeline Observability</div>
-        <div class="psub">B2B SaaS · Developer Tools</div>
-        <p class="pdesc">Proactive alerting and monitoring product for data teams. PRD + GTM plan in progress.</p>
-        <div class="ptags"><span class="ptag">B2B SaaS</span><span class="ptag">Dev Tools</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="gline"></div>
-
-<!-- CASE STUDY DEEP DIVE -->
-<section id="cases">
-  <div class="sec">
-    <div class="slbl2">Case Studies</div>
-    <h2>How I think through products</h2>
-    <div class="cgrid">
-
-      <div class="ccard rev">
-        <div class="ctop">
-          <div class="ctit">ChatGPT Voice Nudge — Full PRD</div>
-          <div class="ctag">AI PM Fellowship · NextLeap</div>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec">
+      <div class="agrid">
+        <div class="rev">
+          <div class="slbl2">About</div>
+          <h2>Data depth meets<br>AI product strategy</h2>
+          <p class="ap">I spent 7 years engineering petabyte-scale data infrastructure — leading teams and simplifying complex pipelines into business outcomes for <strong>Uber, Apple, and Google</strong>.</p>
+          <p class="ap">As a <strong>NextLeap AI PM Fellow</strong>, I build LLM products, design robust AI workflows, and ship live prototypes. My deep technical foundation allows me to comfortably spec RAG architectures, evaluate AI models, and collaborate directly with engineering leads.</p>
+          <p class="ap">I specialize in <strong>AI-native products, Workflow Automation, and B2B SaaS</strong> — where deep technical architecture is the core of user value.</p>
         </div>
-        <div class="metrics">
-          <span class="metric">48% → 60% voice usage target</span>
-          <span class="metric">Nudge CVR >25%</span>
-          <span class="metric">+30% voice sessions / 3 mo</span>
-        </div>
-        <div class="cbody">
-          <div class="ccol">
-            <div class="cclbl">Research (n=25)</div>
-            <ul>
-              <li>88% awareness, ~48% regular usage — behavior gap, not discovery</li>
-              <li>48% feel socially awkward using voice in shared spaces</li>
-              <li>48% face accent/language recognition issues</li>
-              <li>44% prefer typing for control and editability</li>
-            </ul>
+        <div class="rev">
+          <div class="skillgroup">
+            <div class="skilllbl">AI Product & Automation</div>
+            <div class="tags">
+              <span class="tag">LLM Applications</span><span class="tag">AI Agents (MCP)</span><span class="tag">RAG Pipelines</span><span class="tag">AI Evals</span><span class="tag">Workflow Automation</span><span class="tag">Prompt Engineering</span>
+            </div>
           </div>
-          <div class="ccol">
-            <div class="cclbl">Solution</div>
-            <ul>
-              <li>Contextual voice nudges — intent-triggered, non-intrusive</li>
-              <li>Trigger logic: query length + context signals above threshold</li>
-              <li>Adaptive suppression if nudges are dismissed</li>
-              <li>Selected over privacy mode and editability features for faster experimentation</li>
-            </ul>
+          <div class="skillgroup">
+            <div class="skilllbl">Product Management</div>
+            <div class="tags">
+              <span class="tag">PRD & Spec Writing</span><span class="tag">User Research</span><span class="tag">Roadmapping</span><span class="tag">0→1 Product Strategy</span><span class="tag">A/B Testing</span><span class="tag">Metrics & OKRs</span>
+            </div>
           </div>
-          <div class="ccol">
-            <div class="cclbl">Success Metrics</div>
-            <ul>
-              <li>Voice Usage Rate — % active users using voice at least once</li>
-              <li>Nudge Conversion Rate — % nudges leading to voice activation</li>
-              <li>Voice Sessions per User — weekly avg</li>
-              <li>Voice User Retention (7-day)</li>
-              <li>Nudge Dismissal Rate</li>
-            </ul>
+          <div class="skillgroup">
+            <div class="skilllbl">Technical Leadership</div>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Apache Spark</span><span class="tag">Airflow</span><span class="tag">Snowflake</span><span class="tag">REST APIs</span><span class="tag">System Architecture</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="ccard rev">
-        <div class="ctop">
-          <div class="ctit">PhonePe Marketplace — 0→1</div>
-          <div class="ctag">Fintech · Commerce</div>
+  <!-- PROJECTS & CASES -->
+  <section id="projects">
+    <div class="sec">
+      <div class="slbl2">Selected Work</div>
+      <h2>AI builds & product case studies</h2>
+      <div class="pgrid">
+        
+        <!-- NEW PROJECT 1: MCP-Server-Project -->
+        <div class="pcard rev">
+          <div class="pn">01 · Technical Build</div>
+          <div class="ptit">Google Docs MCP Server</div>
+          <div class="psub">AI Agents · Workflow Automation · System Architecture</div>
+          <p class="pdesc">Designed and deployed a 4-phase AI agent architecture integrating Model Context Protocol (MCP) with Google Workspace. Automated the end-to-end flow of data analysis to final report generation.</p>
+          
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <span class="metric-val">100%</span>
+              <span class="metric-lbl">Automated Reporting</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">Phase 4</span>
+              <span class="metric-lbl">Prod Deployed</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">OAuth 2.0</span>
+              <span class="metric-lbl">Secure Auth</span>
+            </div>
+          </div>
+
+          <div class="ptags">
+            <span class="ptag">AI Agents</span><span class="ptag">Automation</span><span class="ptag">API Integration</span>
+          </div>
+          <div class="plinks">
+            <a href="https://github.com/Satyamp32/mcp-google-docs" target="_blank" rel="noopener" class="plink">GitHub Repo →</a>
+          </div>
         </div>
-        <div class="cbody">
-          <div class="ccol">
-            <div class="cclbl">Problem</div>
-            <ul>
-              <li>Users search for commercial services in PhonePe but hit dead ends</li>
-              <li>No structured layer to capture transactional search intent</li>
-              <li>Missed cross-sell across 8+ commerce categories</li>
-            </ul>
+
+        <!-- NEW PROJECT 2: Zomato_AI_Assistance -->
+        <div class="pcard rev">
+          <div class="pn">02 · Product Case Study</div>
+          <div class="ptit">Zomato AI Assistant</div>
+          <div class="psub">Search Optimization · Consumer AI · Vercel/Railway</div>
+          <p class="pdesc">Built an end-to-end full-stack AI restaurant recommendation engine for Zomato. Implemented dynamic semantic search parsing for hyper-local context (e.g., "healthy dinner under ₹300 in Indiranagar").</p>
+          
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <span class="metric-val">-40%</span>
+              <span class="metric-lbl">Zero-Result Rate</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">NLP</span>
+              <span class="metric-lbl">Intent Parsing</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">Full-Stack</span>
+              <span class="metric-lbl">Deployed Prod</span>
+            </div>
           </div>
-          <div class="ccol">
-            <div class="cclbl">Solution</div>
-            <ul>
-              <li>Intent-led marketplace triggered by commercial search queries</li>
-              <li>Category → Subcategory → Action flow across travel, learning, entertainment etc.</li>
-              <li>Mobile-first UX designed for fintech behavioral patterns</li>
-            </ul>
+
+          <div class="ptags">
+            <span class="ptag">Semantic Search</span><span class="ptag">UX Conversion</span><span class="ptag">Full-Stack AI</span>
           </div>
-          <div class="ccol">
-            <div class="cclbl">Metrics</div>
-            <ul>
-              <li>Search-to-action conversion rate</li>
-              <li>New commerce GMV through marketplace</li>
-              <li>Session depth and cross-sell rate per category</li>
-            </ul>
+          <div class="plinks">
+            <a href="https://github.com/Satyamp32/zomato-ai-assistant" target="_blank" rel="noopener" class="plink">View Code →</a>
           </div>
         </div>
-      </div>
 
+        <!-- EXISTING PROJECT: ChatGPT Nudge -->
+        <div class="pcard rev">
+          <div class="pn">03 · User Research & PRD</div>
+          <div class="ptit">ChatGPT Voice Nudge</div>
+          <div class="psub">Behavioral Design · Conversational AI</div>
+          <p class="pdesc">Conducted 25-user research study to surface ChatGPT voice adoption gaps. Designed contextual intent-driven voice nudges, targeting a 60% usage conversion. Wrote full PRD with metrics and A/B test plans.</p>
+          <div class="ptags">
+            <span class="ptag">User Research</span><span class="ptag">PRD</span><span class="ptag">Behavioral Logic</span>
+          </div>
+          <div class="plinks">
+            <a href="https://satyam-speak-easy-nudge.lovable.app/" target="_blank" rel="noopener" class="plink">View Prototype →</a>
+          </div>
+        </div>
+
+        <!-- EXISTING PROJECT: PhonePe Marketplace -->
+        <div class="pcard rev">
+          <div class="pn">04 · 0→1 Product Strategy</div>
+          <div class="ptit">PhonePe Marketplace</div>
+          <div class="psub">Fintech · Intent-led Commerce</div>
+          <p class="pdesc">Conceptualized an intent-led marketplace within PhonePe across 8+ commerce verticals. Designed a mobile-first UX flow aligned with fintech behavior patterns to convert transactional search intent.</p>
+          <div class="ptags">
+            <span class="ptag">0→1 Design</span><span class="ptag">Cross-sell</span><span class="ptag">UX Flow</span>
+          </div>
+          <div class="plinks">
+            <a href="https://satyam-phonepe-marketplace.lovable.app/" target="_blank" rel="noopener" class="plink">View Prototype →</a>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="gline"></div>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sec">
+      <div class="slbl2">Experience</div>
+      <h2>Career journey</h2>
+      <div class="tl">
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="sec">
-    <div class="slbl2">Experience</div>
-    <h2>Career journey</h2>
-    <div class="tl">
+        <div class="tli rev">
+          <div class="tmeta">March 2026 – Present</div>
+          <div class="ttit">AI Product Manager Fellow</div>
+          <div class="tco">NextLeap</div>
+          <ul class="tbl">
+            <li>Building AI-native products: MCP workflows, AI agents, RAG pipelines, and conversational interfaces.</li>
+            <li>Conducted user research (n=25) on voice adoption; authored full PRDs detailing A/B tests and MVP scopes.</li>
+            <li>Shipped full-stack prototypes leveraging prompt engineering, semantic search, and vibe coding.</li>
+          </ul>
+        </div>
 
-      <div class="tli amber rev">
-        <div class="tmeta">March 2026 – June 2026 <span class="nowtag">CURRENT</span></div>
-        <div class="ttit">AI Product Manager Fellow</div>
-        <div class="tco amber">NextLeap · AI PM Fellowship</div>
-        <ul class="tbl">
-          <li>Building AI-native products: LLM applications, AI agents, RAG pipelines, chatbot design, AI evals, and AI workflows</li>
-          <li>Conducted 25-user research study on ChatGPT voice adoption; wrote full PRD with metrics, user flows, and A/B test plan</li>
-          <li>Shipped live prototypes using vibe coding — PhonePe Marketplace and Voice Nudge System</li>
-          <li>Applied guesstimate frameworks, RCA methodologies, OKR design, and MVP scoping across product exercises</li>
-        </ul>
+        <div class="tli rev">
+          <div class="tmeta">April 2026 – Present</div>
+          <div class="ttit">Technical Lead</div>
+          <div class="tco">Wipro Technologies · Client: Apple Inc.</div>
+          <ul class="tbl">
+            <li>Leading technical delivery for Apple's petabyte-scale enterprise data platform initiatives.</li>
+            <li>Managing end-to-end platform operations, serving as the bridge between engineering execution and business stakeholder roadmaps.</li>
+          </ul>
+        </div>
+
+        <div class="tli rev">
+          <div class="tmeta">September 2025 – March 2026</div>
+          <div class="ttit">Technical Lead</div>
+          <div class="tco">Wipro Technologies · Client: The Hartford</div>
+          <ul class="tbl">
+            <li>Led the 0→1 design and build of an AWS MWAA data orchestration platform for insurance operations.</li>
+            <li>Acted as technical product owner, integrating Snowflake and Talend via REST APIs, reducing pipeline incidents by 35%.</li>
+          </ul>
+        </div>
+
+        <div class="tli rev">
+          <div class="tmeta">August 2023 – August 2025</div>
+          <div class="ttit">Senior Software Engineer — Data Platform Lead</div>
+          <div class="tco">Wipro Technologies · Client: Uber Technologies</div>
+          <ul class="tbl">
+            <li>Led production operations across 10+ data platforms handling 500+ daily workflows; awarded "Inspiring Performance" badge.</li>
+            <li>Automated operational pipelines saving 100+ manual hours/month; built Tableau dashboards for C-level visibility.</li>
+          </ul>
+        </div>
+
+        <div class="tli rev">
+          <div class="tmeta">June 2021 – July 2023</div>
+          <div class="ttit">Software Engineer — Data Engineering</div>
+          <div class="tco">Wipro Technologies · Client: Uber Technologies</div>
+          <ul class="tbl">
+            <li>Built ETL workflows (Spark, Airflow) and self-serve diagnostic tools, reducing L1 escalations by 30%.</li>
+          </ul>
+        </div>
+
+        <div class="tli rev">
+          <div class="tmeta">May 2019 – May 2021</div>
+          <div class="ttit">Team Lead / Data Analyst</div>
+          <div class="tco">Wipro Technologies · Client: Google YouTube</div>
+          <ul class="tbl">
+            <li>Led an 18-member operations team focused on platform integrity; automated processes to improve SLA adherence.</li>
+          </ul>
+        </div>
+
       </div>
-
-      <div class="tli amber rev">
-        <div class="tmeta">April 2026 – Present <span class="nowtag">CURRENT</span></div>
-        <div class="ttit">Technical Lead</div>
-        <div class="tco amber">Wipro Technologies · Client: Apple Inc.</div>
-        <ul class="tbl">
-          <li>Leading technical delivery and cross-functional coordination for Apple's data platform initiatives</li>
-          <li>Managing end-to-end platform operations, stakeholder alignment, and delivery roadmap for enterprise-scale data systems</li>
-          <li>Serving as primary technical interface between engineering and business stakeholders</li>
-        </ul>
-      </div>
-
-      <div class="tli rev">
-        <div class="tmeta">September 2025 – March 2026</div>
-        <div class="ttit">Technical Lead</div>
-        <div class="tco">Wipro Technologies · Client: The Hartford</div>
-        <ul class="tbl">
-          <li>Led design and build of an end-to-end data orchestration platform on Amazon MWAA from scratch for insurance data operations</li>
-          <li>Integrated Query Engine, Talend, and Snowflake via REST APIs — enabling cross-platform data exchange at enterprise scale</li>
-          <li>Implemented dynamic DAG generation and custom alerting (Slack + CloudWatch), reducing pipeline incidents by 35%</li>
-          <li>Acted as technical product owner — leading stakeholder design reviews, testing, and production deployment</li>
-        </ul>
-      </div>
-
-      <div class="tli rev">
-        <div class="tmeta">August 2023 – August 2025</div>
-        <div class="ttit">Senior Software Engineer — Data Platform Lead</div>
-        <div class="tco">Wipro Technologies · Client: Uber Technologies</div>
-        <ul class="tbl">
-          <li>Led L1/L2 production support across 10+ enterprise data platforms — SLA adherence for 500+ daily workflows</li>
-          <li>Automated operational workflows reducing manual monitoring by 100+ hours/month</li>
-          <li>Built Tableau/GDS dashboards for C-level leadership visibility (CSAT, SLA, platform health)</li>
-          <li>Primary Incident Manager during critical outages — led bridge calls, RCA, reduced MTTR by 40%</li>
-          <li>Mentored 10+ engineers; selected for Wipro Quality Audit Team</li>
-        </ul>
-        <span class="badge">★ Inspiring Performance Award · Victory League · Winner Circle</span>
-      </div>
-
-      <div class="tli rev">
-        <div class="tmeta">June 2021 – July 2023</div>
-        <div class="ttit">Software Engineer — Data Engineering</div>
-        <div class="tco">Wipro Technologies · Client: Uber Technologies</div>
-        <ul class="tbl">
-          <li>Built ETL workflows and automated pipelines (Spark, Airflow, Presto) for distributed data processing</li>
-          <li>Shipped self-service diagnostic tools reducing L1 escalation rates by ~30%</li>
-          <li>Conducted 50+ technical interviews; automated Jira/Slack operations workflows</li>
-        </ul>
-      </div>
-
-      <div class="tli rev">
-        <div class="tmeta">May 2019 – May 2021</div>
-        <div class="ttit">Team Lead / Data Analyst</div>
-        <div class="tco">Wipro Technologies · Client: Google YouTube</div>
-        <ul class="tbl">
-          <li>Led 18-member team — operations, quality control, and primary client liaison</li>
-          <li>Improved KPIs and SLA performance through process automation</li>
-          <li>Built dashboards driving data-based decisions for YouTube platform integrity</li>
-        </ul>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="gline"></div>
-
-<!-- CERTS -->
-<section id="certs">
-  <div class="sec">
-    <div class="slbl2">Credentials</div>
-    <h2>Certifications & education</h2>
-    <div class="certgrid">
-      <div class="cert rev"><div class="cico">AI·PM</div><div class="cname">AI Product Manager Fellowship</div><div class="ciss">NextLeap · 2026</div></div>
-      <div class="cert rev"><div class="cico">PM</div><div class="cname">Product Manager Fellowship</div><div class="ciss">NextLeap · 2025</div></div>
-      <div class="cert rev"><div class="cico">PMP</div><div class="cname">Project Management Professional</div><div class="ciss">PMI</div></div>
-      <div class="cert rev"><div class="cico">AGL</div><div class="cname">Agile Project Management</div><div class="ciss">Google / Coursera</div></div>
-      <div class="cert rev"><div class="cico">AI</div><div class="cname">AI Aware Badge — AI For All</div><div class="ciss">AI Certification</div></div>
-      <div class="cert rev"><div class="cico">BE</div><div class="cname">B.E. Computer Science</div><div class="ciss">VTU · 2013–2017</div></div>
+  <!-- CERTS -->
+  <section id="certs">
+    <div class="sec">
+      <div class="slbl2">Credentials</div>
+      <h2>Certifications & education</h2>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        <div class="tag rev" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;"><strong>AI PM Fellowship</strong> · NextLeap 2026</div>
+        <div class="tag rev" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;"><strong>PM Fellowship</strong> · NextLeap 2025</div>
+        <div class="tag rev" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;"><strong>PMP</strong> · Project Management Institute</div>
+        <div class="tag rev" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;"><strong>Agile PM</strong> · Google Coursera</div>
+        <div class="tag rev" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;"><strong>B.E. Computer Science</strong> · VTU 2017</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="gline"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="ci">
-    <div class="slbl2" style="justify-content:center">Get in touch</div>
-    <h2>Let's build<br><em>something together</em></h2>
-    <p>Actively exploring PM and AI PM roles — data products, LLM tooling, developer platforms, or B2B SaaS. If you need a PM who speaks engineering fluently and ships fast, let's talk.</p>
-    <div class="cbtns">
-      <a href="mailto:s*****32@gmail.com" class="btnp" onclick="event.preventDefault();window.location='mailto:satyamp32@gmail.com'">Email Me</a>
-      <a href="https://www.linkedin.com/in/satyamp32/" target="_blank" rel="noopener" class="btns">LinkedIn ↗</a>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sec">
+      <div class="ci">
+        <div class="slbl2" style="justify-content:center">Get in touch</div>
+        <h2>Let's build something</h2>
+        <p>Actively exploring PM and AI PM roles — data products, LLM tooling, developer platforms, or B2B SaaS. If you need a PM who speaks engineering fluently and ships fast, let's talk.</p>
+        <div class="cbtns">
+          <a href="mailto:satyamp32@gmail.com" class="btn-primary">Email Me</a>
+          <a href="https://www.linkedin.com/in/satyamp32/" target="_blank" rel="noopener" class="btn-secondary">LinkedIn ↗</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <span class="ft">© 2026 Satyam Kumar Pandey</span>
-  <span class="ft">AI Product Manager · Bengaluru, India</span>
-  <span class="ft">All rights reserved</span>
-</footer>
+  <footer>
+    <span class="ft">© 2026 Satyam Kumar Pandey</span>
+    <span class="ft">AI Product Manager · Bengaluru, India</span>
+  </footer>
 
-<script>
-/* COPY PROTECTION */
-document.addEventListener('contextmenu',e=>e.preventDefault());
-document.addEventListener('keydown',e=>{
-  if((e.ctrlKey||e.metaKey)&&['c','u','s','a','p'].includes(e.key.toLowerCase()))e.preventDefault();
-  if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(e.key.toLowerCase())))e.preventDefault();
-});
-document.addEventListener('copy',e=>e.preventDefault());
-document.addEventListener('dragstart',e=>e.preventDefault());
-
-/* CUSTOM CURSOR */
-const cur=document.getElementById('cur'),curR=document.getElementById('curR');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function anim(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(anim)})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{curR.style.transform='translate(-50%,-50%) scale(1.7)';curR.style.borderColor='rgba(99,220,185,.7)'});
-  el.addEventListener('mouseleave',()=>{curR.style.transform='translate(-50%,-50%) scale(1)';curR.style.borderColor='rgba(99,220,185,.4)'});
-});
-
-/* PARTICLES */
-const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');
-let W,H,pts=[];
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.5+.5,o:Math.random()*.45+.1}))}
-resize();window.addEventListener('resize',resize);
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  pts.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>W)p.vx*=-1;
-    if(p.y<0||p.y>H)p.vy*=-1;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(99,220,185,${p.o})`;ctx.fill();
-    pts.forEach(q=>{
-      const d=Math.hypot(p.x-q.x,p.y-q.y);
-      if(d<130){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(99,220,185,${.06*(1-d/130)})`;ctx.lineWidth=.5;ctx.stroke()}
-    });
-  });
-  requestAnimationFrame(draw);
-}
-draw();
-
-/* SCROLL REVEAL */
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*70);obs.unobserve(e.target)}})
-},{threshold:.06});
-document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
-</script>
+  <script src="js/main.js"></script>
 </body>
 </html>
